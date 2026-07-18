@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Uploads
+uploads/
+*.xlsx
+*.csv
+!tests/fixtures/*.csv
+!tests/fixtures/*.xlsx
+
+# Alembic
+alembic/versions/*.pyc
+
+# Docker
+docker-data/
+
+# Logs
+*.log
+
+# Project notes
+notes.docx
+notes.txt
