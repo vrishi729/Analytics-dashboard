@@ -10,13 +10,19 @@ from app.analytics.engine import (
     get_sales_trends,
     get_top_products,
 )
+from app.models.dataset import Dataset
 from app.models.sales_record import SalesRecord
+from app.models.user import User
 
 
 @pytest.fixture
-def sample_records() -> list[SalesRecord]:
+async def sample_records(db_session) -> list[SalesRecord]:
     uid = uuid.uuid4()
     did = uuid.uuid4()
+    user = User(id=uid, email='analytics_test@example.com', hashed_password='test')
+    dataset = Dataset(id=did, user_id=uid, original_filename='test.csv', stored_filename='test.csv')
+    db_session.add_all([user, dataset])
+    await db_session.commit()
     return [
         SalesRecord(
             id=uuid.uuid4(),

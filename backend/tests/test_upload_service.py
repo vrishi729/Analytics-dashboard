@@ -28,9 +28,9 @@ def test_valid_csv_parses_successfully():
 
 def test_missing_required_columns_fails():
     content, filename, size = _read_fixture('missing_columns.csv')
-    with pytest.raises(ValidationError) as exc:
-        parse_and_validate(content, filename, size)
-    assert 'unit_price' in str(exc.value)
+    df, summary, stored = parse_and_validate(content, filename, size)
+    assert not summary.is_valid
+    assert 'unit_price' in summary.missing_required_columns
 
 
 def test_alt_headers_are_mapped():

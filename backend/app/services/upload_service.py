@@ -259,5 +259,10 @@ def parse_and_validate(
     df = read_file_to_dataframe(content, filename)
     summary = validate_and_summarize(df)
 
+    if summary.is_valid:
+        header_map = _map_headers(list(df.columns))
+        df = df.rename(columns={v: k for k, v in header_map.items()})
+        df = df[list(header_map.keys())]
+
     stored_filename = f'{uuid.uuid4().hex}{os.path.splitext(filename)[1]}'
     return df, summary, stored_filename
