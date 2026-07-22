@@ -224,12 +224,15 @@ async def get_sales_growth(
             'previous_period': previous_year,
         }
 
+    curr_rev = trends[-1]['total_revenue']
+    prev_rev = trends[-2]['total_revenue']
+    growth_rate = round(((curr_rev - prev_rev) / prev_rev) * 100, 2)
     return {
-        'growth_rate': 0.0,
-        'current_period_revenue': 0.0,
-        'previous_period_revenue': 0.0,
-        'current_period': current_year,
-        'previous_period': previous_year,
+        'growth_rate': growth_rate,
+        'current_period_revenue': round(curr_rev, 2),
+        'previous_period_revenue': round(prev_rev, 2),
+        'current_period': trends[-1]['period'],
+        'previous_period': trends[-2]['period'],
     }
 
 
