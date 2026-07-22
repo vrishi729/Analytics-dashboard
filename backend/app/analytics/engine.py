@@ -298,7 +298,7 @@ async def _compute_start_date(
         return None
     max_dt = max_date if isinstance(max_date, date) else date.fromisoformat(str(max_date))
 
-    return max_dt - relativedelta(months=months_back)
+    return (max_dt - relativedelta(months=months_back)).date()  # type: ignore[no-any-return]
 
 
 async def get_full_analytics(

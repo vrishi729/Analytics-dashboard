@@ -208,7 +208,7 @@ async def generate_recommendations(
             month_revenues[month_label].append(t['total_revenue'])
         month_avg = {m: sum(vs) / len(vs) for m, vs in month_revenues.items()}
         if month_avg:
-            best_month_num = max(month_avg, key=month_avg.get)
+            best_month_num = max(month_avg, key=lambda k: month_avg[k])
             peak_avg = month_avg[best_month_num]
             overall_avg = sum(month_avg.values()) / len(month_avg)
             if overall_avg > 0 and peak_avg > overall_avg * 1.15:
@@ -309,9 +309,9 @@ async def generate_recommendations(
         )
 
     # --- Priority ordering ---
-    priority_map = {'warning': 0, 'positive': 1, 'action': 2, 'info': 3}
+    priority_map = {'warning': '0', 'positive': '1', 'action': '2', 'info': '3'}
     for rec in recommendations:
-        rec['priority'] = priority_map.get(rec.get('type', 'info'), 99)
+        rec['priority'] = priority_map.get(str(rec.get('type', 'info')), '9')
     recommendations.sort(key=lambda r: (r['priority'], r.get('title', '')))
 
     return recommendations

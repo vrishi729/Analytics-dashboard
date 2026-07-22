@@ -3,6 +3,7 @@ from typing import Any
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from fastapi.responses import FileResponse
+from sqlalchemy import delete as sa_delete
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -64,7 +65,7 @@ async def delete_dataset(
 
     from app.models.sales_record import SalesRecord
 
-    await db.execute(SalesRecord.__table__.delete().where(SalesRecord.dataset_id == did))
+    await db.execute(sa_delete(SalesRecord).where(SalesRecord.dataset_id == did))
     await db.delete(dataset)
     await db.flush()
 
@@ -76,7 +77,7 @@ async def download_dataset(
     dataset_id: str,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
-):
+) -> FileResponse:
     did = uuid.UUID(dataset_id)
     result = await db.execute(
         select(Dataset).where(

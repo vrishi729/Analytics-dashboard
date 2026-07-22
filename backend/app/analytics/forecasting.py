@@ -24,7 +24,7 @@ SEASONAL_PERIODS = {
 }
 
 
-def _holt_winters(series, steps, horizon='month'):
+def _holt_winters(series: pd.Series, steps: int, horizon: str = 'month') -> tuple[Any, pd.Series]:
     from statsmodels.tsa.holtwinters import ExponentialSmoothing
 
     seasonal_periods = SEASONAL_PERIODS.get(horizon, 12)
