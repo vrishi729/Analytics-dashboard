@@ -219,7 +219,7 @@ async def generate_recommendations(
                         'type': 'info',
                         'title': f'{month_name[int(best_month_num)]} is your peak season',
                         'description': (
-                            f'Over {num_years}y of data, {month_name[int(best_month_num)]} averages '
+                            f'Over {num_years}y, {month_name[int(best_month_num)]} avg '
                             f'${peak_avg:,.0f} — {boost_pct:.0f}% above the yearly avg of '
                             f'${overall_avg:,.0f}. Build inventory 6-8 weeks ahead to maximize '
                             'this consistent seasonal pattern.'
