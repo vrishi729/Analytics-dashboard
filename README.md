@@ -87,8 +87,3 @@ npm run dev
 - Required columns: Order Date, Product Name, Quantity Sold, Unit Price
 - Optional columns: Category, Revenue
 
----
-
-## License
-
-MIT
